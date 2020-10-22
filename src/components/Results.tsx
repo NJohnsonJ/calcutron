@@ -35,7 +35,7 @@ const Results: React.FC<{database: Database}> = ({database}) => {
 
     return (
         <Wrapper>
-            <h2>Results</h2>
+            <h2>RESULTS</h2>
             {results.reverse().map(result => (
                     <Card>
                         <CardContent>
