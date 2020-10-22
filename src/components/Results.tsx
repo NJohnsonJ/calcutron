@@ -3,6 +3,7 @@ import { Typography, Card, CardContent } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { Database, Calculation } from "../api/database";
 import firebase from "firebase";
+import styled from "styled-components";
 import moment from "moment";
 
 const Results: React.FC<{database: Database}> = ({database}) => {
@@ -23,7 +24,7 @@ const Results: React.FC<{database: Database}> = ({database}) => {
 
     function updateResults(newResult: Calculation) {
         setResults(prevState => {
-            return [...prevState, newResult];
+            return [newResult, ...prevState];
         });
     }
 
@@ -35,16 +36,23 @@ const Results: React.FC<{database: Database}> = ({database}) => {
     return (
         <div>
             <h2>Results</h2>
-            {results.map(result => (
-                <Card>
-                    <CardContent>
-                        <Typography>{result.user} at {prettifyDate(result.time)}:</Typography>
-                        <Typography>{result.input} = {result.result}</Typography>
-                    </CardContent>
-                </Card>
+            {results.reverse().map(result => (
+                <Wrapper>
+                    <Card>
+                        <CardContent>
+                            <Typography variant="caption" color="textSecondary">{result.user} at {prettifyDate(result.time)}:</Typography>
+                            <Typography color="secondary">{result.input} = {result.result}</Typography>
+                        </CardContent>
+                    </Card>
+                </Wrapper>
             ))}
         </div>
     )
 }
+
+const Wrapper = styled.div`
+    margin-top: 1em;
+    margin-bottom: 1em;
+`;
 
 export default Results;
