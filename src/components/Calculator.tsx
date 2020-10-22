@@ -67,7 +67,7 @@ const Calculator: React.FC<{database: Database}> = ({database}) => {
     }
 
     function validateInput(value: string) {
-        return value.match(/^[0-9+\-*/%]*$/);
+        return value.match(/^$|^\-{0,1}[0-9]+(?:[+\-\/*%]\-{0,1}[0-9]+)*$/);
     }
 
     return (
