@@ -34,25 +34,24 @@ const Results: React.FC<{database: Database}> = ({database}) => {
     }
 
     return (
-        <div>
+        <Wrapper>
             <h2>Results</h2>
             {results.reverse().map(result => (
-                <Wrapper>
                     <Card>
                         <CardContent>
                             <Typography variant="caption" color="textSecondary">{result.user} at {prettifyDate(result.time)}:</Typography>
                             <Typography color="secondary">{result.input} = {result.result}</Typography>
                         </CardContent>
                     </Card>
-                </Wrapper>
             ))}
-        </div>
+        </Wrapper>
     )
 }
 
 const Wrapper = styled.div`
-    margin-top: 1em;
-    margin-bottom: 1em;
+    h2 {
+        text-align: center;
+    }
 `;
 
 export default Results;
