@@ -3,9 +3,11 @@ import firebase from "firebase";
 
 const endpoint = "/calculations"
 
+const limit = 10;
+
 export interface Calculation {
     user: string;
-    time: Date;
+    time: any;
     input: string;
     result: string;
 }
@@ -20,13 +22,11 @@ export type dataCallback = (data: firebase.database.DataSnapshot, b?: string | n
 export function setupDatabase(): Database {
     const db = initialize();
     return {
-        save: (calculation: Calculation) => {
-            console.log("Saving")
-            console.log(calculation)
-            const res = db.ref(endpoint).push(calculation)
-            console.log(res.root);
-        },
-        listen: (callback: dataCallback) => db.ref(endpoint).on("child_added", callback)
+        save: (calculation: Calculation) => db.ref(endpoint).push(calculation),
+        listen: (callback: dataCallback) => db.ref(endpoint)
+            .orderByChild("time")
+            .limitToFirst(limit)
+            .on("child_added", callback)
     }
 }
 
