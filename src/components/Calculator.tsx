@@ -14,7 +14,12 @@ type Color =
     | 'textSecondary'
     | 'error';
 
-const Calculator: React.FC<{ database: Database }> = ({ database }) => {
+interface Props {
+    database: Database;
+    user: string;
+}
+
+const Calculator: React.FC<Props> = ({ database, user }) => {
 
     const [input, setInput] = useState<string>("");
     const [message, setMessage] = useState<string>("TRY TO CONFOUND ME, HUMAN.");
@@ -62,7 +67,7 @@ const Calculator: React.FC<{ database: Database }> = ({ database }) => {
         database.save({
             input,
             result,
-            user: "Nathaniel",
+            user,
             time: firebase.database.ServerValue.TIMESTAMP
         })
 
@@ -70,7 +75,7 @@ const Calculator: React.FC<{ database: Database }> = ({ database }) => {
     }
 
     function validateInput(value: string) {
-        return value.match(/^$|^\-{0,1}[0-9\s]+(?:[+\-\/*%]\-{0,1}[0-9\s]+)*$/);
+        return value.match(/^$|^-{0,1}[0-9\s]+(?:[+-/*%]-{0,1}[0-9\s]+)*$/);
     }
 
     return (
@@ -104,7 +109,6 @@ const Calculator: React.FC<{ database: Database }> = ({ database }) => {
 }
 
 const Wrapper = styled.div`
-    margin-top: 1em;
 `;
 
 export default Calculator;
