@@ -3,15 +3,17 @@
 > COWER BEFORE THE MIGHTY CALCUTRON.
 
 Calcutron is a basic web app that parses mathematical input and evalutes the expression. The results are persisted in firbase realtime database.
+Try it out <a href="https://sezzle-calcutron.web.app/">here</a>.
 
 ## Stack
 
-This app is built using <strong>React</strong> and <strong>TypeScript</strong> alongside a <strong>firebase </strong> realtime database. Firebase was selected because it has a neat api for listening to updates and is free to use. 
+This app is built using <strong>React</strong> and <strong>TypeScript</strong> alongside a <strong>firebase </strong> realtime database. Firebase was selected because it has a neat api for listening to updates and is free to use. The app is then deployed with firebase hosting at https://sezzle-calcutron.web.app.
 
 ## Development
 
 This app can be run with Node and Yarn (or npm).
 Navigate to the directory containing the projects code and run `yarn start` to launch a development server at <a href="localhost:3000">localhost:3000</a>.
+
 ## Limitations
 
 There is one main weakness to this app that must be acknowledged. 
