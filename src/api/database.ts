@@ -25,7 +25,7 @@ export function setupDatabase(): Database {
         save: (calculation: Calculation) => db.ref(endpoint).push(calculation),
         listen: (callback: dataCallback) => db.ref(endpoint)
             .orderByChild("time")
-            .limitToFirst(limit)
+            .limitToLast(limit)
             .on("child_added", callback)
     }
 }
