@@ -10,7 +10,7 @@ import Login from './components/Login';
 function App() {
 
   const [user, setUser] = useState<string>("");
-  const [database, setDatabase] = useState<Database|null>(null);
+  const [database, setDatabase] = useState<Database | null>(null);
 
   // Setup the database connection
   useEffect(() => {
@@ -19,7 +19,7 @@ function App() {
 
   return (
     <MainContainer>
-      <Header/>
+      <Header />
       <main>
         <Grid container direction="column" alignContent="center">
           {user === "" && (

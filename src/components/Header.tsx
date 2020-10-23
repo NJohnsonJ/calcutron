@@ -3,16 +3,16 @@ import styled from "styled-components";
 import { Grid, Typography } from "@material-ui/core";
 
 const Header = () => (
-    <FancyHeader>
-        <Grid container justify="space-between" alignItems="center">
-            <Grid item>
-                <h1>CALCUTRON</h1>
-            </Grid>
-            <Grid item>
-                <Typography color="secondary">THE WORLD'S SMARTEST CALCULATOR</Typography>
-            </Grid>
-        </Grid>
-    </FancyHeader>
+  <FancyHeader>
+    <Grid container justify="space-between" alignItems="center">
+      <Grid item>
+        <h1>CALCUTRON</h1>
+      </Grid>
+      <Grid item>
+        <Typography color="secondary">THE WORLD'S SMARTEST CALCULATOR</Typography>
+      </Grid>
+    </Grid>
+  </FancyHeader>
 );
 
 const FancyHeader = styled.header`
