@@ -51,7 +51,7 @@ const Calculator: React.FC<Props> = ({ database, user }) => {
 
   function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
 
-    if (!validateInput(input)) {
+    if (!validateInput(input) || input.length === 0) {
       generateErrorMessage();
       return;
     }
@@ -83,16 +83,16 @@ const Calculator: React.FC<Props> = ({ database, user }) => {
     <Wrapper>
       <Card>
         <CardContent>
-          <Grid item>
+          <Grid container justify="center">
             <Typography color={color}><code>{message}</code></Typography>
+            <BasicInput
+              label="ENTER AN EXPRESSION"
+              value={input}
+              buttonText="="
+              onChange={handleChange}
+              onSubmit={handleClick}
+            />
           </Grid>
-          <BasicInput
-            label="ENTER AN EXPRESSION"
-            value={input}
-            buttonText="="
-            onChange={handleChange}
-            onSubmit={handleClick}
-          />
         </CardContent>
       </Card>
     </Wrapper>
