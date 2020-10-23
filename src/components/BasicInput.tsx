@@ -1,5 +1,6 @@
 import React from "react";
 import { FormControl, InputLabel, Input, Button } from "@material-ui/core";
+import styled from "styled-components";
 
 interface InputProps {
   label: string;
@@ -10,7 +11,7 @@ interface InputProps {
 }
 
 const BasicInput: React.FC<InputProps> = ({ label, value, buttonText, onChange, onSubmit }) => (
-  <form>
+  <FancyForm>
     <FormControl>
       <InputLabel htmlFor={`basic-input-${label}`}>{label}</InputLabel>
       <Input
@@ -28,7 +29,13 @@ const BasicInput: React.FC<InputProps> = ({ label, value, buttonText, onChange, 
         {buttonText}
       </Button>
     </FormControl>
-  </form>
+  </FancyForm>
 );
+
+const FancyForm = styled.form`
+  input {
+    width: 100%;
+  }
+`;
 
 export default BasicInput;
