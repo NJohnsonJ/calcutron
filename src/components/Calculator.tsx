@@ -1,128 +1,90 @@
 import React, { useState } from "react";
-import { Card, CardContent, Grid, Typography } from "@material-ui/core"
-import { Database } from "../api/database";
-import firebase from "firebase";
+import { Grid, Button, Typography } from "@material-ui/core";
 import styled from "styled-components";
-import BasicInput from "./BasicInput";
 
-// From the material ui source
-type Color =
-  | 'initial'
-  | 'inherit'
-  | 'primary'
-  | 'secondary'
-  | 'textPrimary'
-  | 'textSecondary'
-  | 'error';
+const CalculatorButton: React.FC<{onClick: () => void}> = ({onClick, ...props}) => (
+  <Button variant="contained" color="primary" onClick={onClick}>{props.children}</Button>
+);
 
-interface Props {
-  database: Database;
-  user: string;
-}
-
-/* Regular Expression to test for a valid expression
- * Can contain numbers of any length followed by any number of operation/number pairs.
- * The supported operations are addition, subtraction, multiplication, division and modulo.
- */
-const expressionRegexp = /^-{0,1}[0-9\s]+(?:[+-/*%]-{0,1}[0-9\s]+)*$/.compile();
-
-const Calculator: React.FC<Props> = ({ database, user }) => {
+export const Calculator: React.FC<{onSubmit: (value: string) => string}> = ({onSubmit}) => {
 
   const [input, setInput] = useState<string>("");
-  const [message, setMessage] = useState<string>("TRY TO CONFOUND ME, HUMAN.");
-  const [color, setColor] = useState<Color>("textPrimary");
+  const [containsResult, setContainsResult] = useState<boolean>(false);
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    e.preventDefault();
-    setInput(e.target.value);
-    generateMessage();
-  }
-
-  function generateMessage() {
-    setColor("textPrimary");
-    if (message !== "") {
-      setMessage("VERY WELL, THEN.")
+  function handleClick(value: string) {
+    if (containsResult) {
+      clear();
     }
+    setInput(prevState => prevState + value);
   }
 
-  function generateWaitingMessage() {
-    setColor("textPrimary")
-    setMessage("THE SUSPENSE IS KILLING ME.")
-  }
-
-  function generateSuccessMessage() {
-    setColor("secondary")
-    setMessage("BEHOLD. YOUR NEURONS ARE NO MATCH FOR MY TRANSISTORS.")
-  }
-
-  function generateErrorMessage() {
-    setColor("error");
-    setMessage("MATH DOES NOT CONTAIN LETTERS, HUMAN.")
-  }
-
-  function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
-    if (input.length === 0) {
-      generateWaitingMessage();
-      return;
-    }
-
-    if (!validateInput(input)) {
-      generateErrorMessage();
-      return;
-    }
-
-    generateSuccessMessage();
-
-    let result = "DOES NOT COMPUTE";
-    try {
-      result = eval(input);
-    } catch (e) {
-      console.log(e);
-    }
-
-    database.save({
-      input,
-      result,
-      user,
-      time: firebase.database.ServerValue.TIMESTAMP
-    })
-
+  function clear() {
     setInput("");
+    setContainsResult(false);
   }
 
-  /**
-   * @param value A mathematical expression
-   * @returns true if the value is an expression, otherwise false.
-   */
-  function validateInput(value: string): boolean {
-    return expressionRegexp.test(value);
+  function backSpace() {
+    setInput(prevState => prevState.slice(0, prevState.length - 1));
+  }
+
+  function handleSubmit() {
+    const result = onSubmit(input);
+    setInput(result);
+    setContainsResult(true);
   }
 
   return (
     <Wrapper>
-      <Card>
-        <CardContent>
-          <Grid container justify="center">
-            <Typography color={color}><code>{message}</code></Typography>
-            <BasicInput
-              label="ENTER AN EXPRESSION"
-              value={input}
-              buttonText="="
-              onChange={handleChange}
-              onSubmit={handleClick}
-            />
-          </Grid>
-        </CardContent>
-      </Card>
+      <Grid container direction="column">
+        <Typography>{input}</Typography>
+        <Grid container direction="row" justify="flex-end">
+          <CalculatorButton onClick={clear}>CLEAR</CalculatorButton>
+          <CalculatorButton onClick={backSpace}>BACK</CalculatorButton>
+        </Grid>
+        <Grid container direction="row">
+          <CalculatorButton onClick={() => handleClick("1")}>1</CalculatorButton>
+          <CalculatorButton onClick={() => handleClick("2")}>2</CalculatorButton>
+          <CalculatorButton onClick={() => handleClick("3")}>3</CalculatorButton>
+          <CalculatorButton onClick={() => handleClick("/")}>/</CalculatorButton>
+        </Grid>
+        <Grid container direction="row">
+          <CalculatorButton onClick={() => handleClick("4")}>4</CalculatorButton>
+          <CalculatorButton onClick={() => handleClick("5")}>5</CalculatorButton>
+          <CalculatorButton onClick={() => handleClick("6")}>6</CalculatorButton>
+          <CalculatorButton onClick={() => handleClick("*")}>*</CalculatorButton>
+        </Grid>
+        <Grid container direction="row">
+          <CalculatorButton onClick={() => handleClick("7")}>7</CalculatorButton>
+          <CalculatorButton onClick={() => handleClick("8")}>8</CalculatorButton>
+          <CalculatorButton onClick={() => handleClick("9")}>9</CalculatorButton>
+          <CalculatorButton onClick={() => handleClick("-")}>-</CalculatorButton>
+        </Grid>
+        <Grid container direction="row">
+          <CalculatorButton onClick={() => handleClick("0")}>0</CalculatorButton>
+          <CalculatorButton onClick={() => handleClick(".")}>.</CalculatorButton>
+          <CalculatorButton onClick={handleSubmit}>=</CalculatorButton>
+          <CalculatorButton onClick={() => handleClick("+")}>+</CalculatorButton>
+        </Grid>
+      </Grid>
     </Wrapper>
   )
 }
 
 const Wrapper = styled.div`
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 1em;
   p {
-    word-wrap: normal;
+    border: 1px solid black;
+    border-radius: 0;
+    height: 3em;
+    text-align: right;
+    margin-bottom: 0.2em;
+    padding: 0.2em;
   }
-  width: 400px; 
+  button {
+    margin: 0.2em !important;
+  }
 `;
 
 export default Calculator;
