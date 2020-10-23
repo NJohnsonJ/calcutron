@@ -84,7 +84,7 @@ const Calculator: React.FC<Props> = ({ database, user }) => {
       <Card>
         <CardContent>
           <Grid item>
-            <Typography color={color}>{message}</Typography>
+            <Typography color={color}><code>{message}</code></Typography>
           </Grid>
           <BasicInput
             label="ENTER AN EXPRESSION"
