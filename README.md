@@ -26,7 +26,8 @@ There is one main weakness to this app that must be acknowledged.
 
 The app uses `eval` to parse and evaluate an input string as a mathematical formula. Generally, it is a bad idea and unsafe to call `eval` on arbitrary strings provided by users. This could be addressed by creating string tokenizer, parser and evaluater. However, that goes beyond the scope of this app. 
 
-## Future Improvement
+## Future Improvements
 
 * Replace `eval` with a string parser/tokenizer/evaluator.
 * It would be cool if an update triggered an animation where the cards shift down and the new calculation fades in.
+* Add a button to load older results.
