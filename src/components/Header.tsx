@@ -1,11 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import { Grid } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 
 const Header = () => (
     <FancyHeader>
-        <Grid container justify="center">
-            <h1>CALCUTRON</h1>
+        <Grid container justify="space-between" alignItems="center">
+            <Grid item>
+                <h1>CALCUTRON</h1>
+            </Grid>
+            <Grid item>
+                <Typography color="secondary">THE WORLD'S SMARTEST CALCULATOR</Typography>
+            </Grid>
         </Grid>
     </FancyHeader>
 );
@@ -16,7 +21,12 @@ const FancyHeader = styled.header`
     font-family: sans-serif;
     color: white;
     background: black;
-    height: 4em;
+    h1 {
+        padding-left: 1em;
+    }
+    p {
+        padding-right: 1em;
+    }
 `;
 
 export default Header;
