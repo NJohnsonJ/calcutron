@@ -22,8 +22,8 @@ const FancyHeader = styled.header`
     color: white;
     background: black;
     h1, p {
-        padding-left: 1em;
-        padding-right: 1em;
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 `;
 
