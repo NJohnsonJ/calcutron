@@ -4,7 +4,7 @@ import { Grid, Typography } from "@material-ui/core";
 
 const Header = () => (
   <FancyHeader>
-    <Grid container justify="space-between" alignItems="center">
+    <Grid container justify="space-between" alignItems="center" alignContent="center">
       <Grid item>
         <h1>CALCUTRON</h1>
       </Grid>
@@ -21,10 +21,8 @@ const FancyHeader = styled.header`
     font-family: sans-serif;
     color: white;
     background: black;
-    h1 {
+    h1, p {
         padding-left: 1em;
-    }
-    p {
         padding-right: 1em;
     }
 `;
