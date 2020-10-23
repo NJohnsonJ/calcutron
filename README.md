@@ -31,4 +31,3 @@ The app uses `eval` to parse and evaluate an input string as a mathematical form
 * Replace `eval` with a string parser/tokenizer/evaluator.
 * It would be cool if an update triggered an animation where the cards shift down and the new calculation fades in.
 * Add a button to load older results.
-* Create a calculator component with buttons for numbers and operations to replace the text input element.
