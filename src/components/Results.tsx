@@ -29,7 +29,8 @@ const Results: React.FC<{ database: Database }> = ({ database }) => {
 
 
   function prettifyDate(date: string) {
-    return moment(date).format("h:mm:ss a");
+    const dateMoment = moment(date);
+    return "on " + dateMoment.format("ddd MMM Do, YYYY") + " at " + dateMoment.format("h:mm:ss a");
   }
 
   return (
@@ -38,7 +39,7 @@ const Results: React.FC<{ database: Database }> = ({ database }) => {
       {results.map(result => (
         <Card key={`result ${result.time}`}>
           <CardContent>
-            <Typography variant="caption" color="textSecondary">{result.user} at {prettifyDate(result.time)}:</Typography> <Typography color="secondary">{result.input} = {result.result}</Typography>
+            <Typography variant="caption" color="textSecondary">{result.user} {prettifyDate(result.time)}:</Typography> <Typography color="primary">{result.input} = {result.result}</Typography>
           </CardContent>
         </Card>
       ))}
