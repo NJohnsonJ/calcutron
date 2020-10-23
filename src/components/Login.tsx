@@ -1,5 +1,6 @@
-import { Button, Card, CardContent, FormControl, FormLabel as InputLabel, Grid, Input} from "@material-ui/core";
 import React, { useState } from "react";
+import BasicInput from "./BasicInput";
+import { Grid, Card, CardContent } from "@material-ui/core";
 
 interface Props {
     handleSubmit: (name: string) => void;
@@ -20,11 +21,13 @@ const Login: React.FC<Props> = (props) => {
         <Grid item>
             <Card>
                 <CardContent>
-                    <FormControl onSubmit={handleSubmit}>
-                        <InputLabel htmlFor="name-input">MORTAL, WHAT IS YOUR NAME?</InputLabel>
-                        <Input id="name-input" type="input" onChange={handleChange} value={name} placeholder="name"></Input>
-                        <Button type="submit" onClick={handleSubmit} variant="contained" color="primary">ENTER</Button>
-                    </FormControl>
+                    <BasicInput
+                        value={name}
+                        label="WHAT IS YOUR NAME?"
+                        buttonText="ENTER"
+                        onChange={handleChange}
+                        onSubmit={handleSubmit}
+                    />
                 </CardContent>
             </Card>
         </Grid>
