@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
-import Calculator from "./components/Calculator";
+import Evaluator from "./components/Evaluator";
 import { Grid, ThemeProvider } from "@material-ui/core";
 import Results from "./components/Results";
 import { Database, setupDatabase } from "./api/database";
@@ -28,7 +28,7 @@ function App() {
             )}
             {database !== null && user !== "" && (
               <React.Fragment>
-                <Calculator database={database} user={user} />
+                <Evaluator database={database} user={user} />
                 <Results database={database} />
               </React.Fragment>
             )}
