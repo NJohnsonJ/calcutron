@@ -1,9 +1,9 @@
 # CALCUTRON 
 
-> COWER BEFORE THE MIGHTY CALCUTRON.
+`COWER BEFORE THE MIGHTY CALCUTRON, THE WORLD'S SMARTEST CALCULATOR.`
 
 Calcutron is a basic web app that parses mathematical input and evalutes the expression. The results are shared across sessions and appear in realtime.
-strong>a href="https://sezzle-calcutron.web.app/">Try it out.</a>
+<a href="https://sezzle-calcutron.web.app/">Try it out.</a>
 
 ## Stack
 
@@ -31,3 +31,4 @@ The app uses `eval` to parse and evaluate an input string as a mathematical form
 * Replace `eval` with a string parser/tokenizer/evaluator.
 * It would be cool if an update triggered an animation where the cards shift down and the new calculation fades in.
 * Add a button to load older results.
+* Create a calculator component with buttons for numbers and operations to replace the text input element.
