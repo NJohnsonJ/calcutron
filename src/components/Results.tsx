@@ -6,46 +6,44 @@ import firebase from "firebase";
 import styled from "styled-components";
 import moment from "moment";
 
-const Results: React.FC<{database: Database}> = ({database}) => {
+const Results: React.FC<{ database: Database }> = ({ database }) => {
 
-    const [results, setResults] = useState<Calculation[]>([]);
+  const [results, setResults] = useState<Calculation[]>([]);
 
-    useEffect(() => {
+  useEffect(() => {
 
-        function handleData(data: firebase.database.DataSnapshot) {
-            const json = data.toJSON();
-            if (json !== null)
-                updateResults(json as Calculation);
-        }
-
-        database.listen(handleData);
-
-    }, [database]);
-
-    function updateResults(newResult: Calculation) {
-        setResults(prevState => {
-            return [newResult, ...prevState];
-        });
+    function handleData(data: firebase.database.DataSnapshot) {
+      const json = data.toJSON();
+      if (json !== null) {
+        updateResults(json as Calculation);
+      }
     }
 
+    database.listen(handleData);
 
-    function prettifyDate(date: string) {
-        return moment(date).format("h:mm:ss a");
-    }
+  }, [database]);
 
-    return (
-        <Wrapper>
-            <h2>RESULTS</h2>
-            {results.reverse().map(result => (
-                    <Card>
-                        <CardContent>
-                            <Typography variant="caption" color="textSecondary">{result.user} at {prettifyDate(result.time)}:</Typography>
-                            <Typography color="secondary">{result.input} = {result.result}</Typography>
-                        </CardContent>
-                    </Card>
-            ))}
-        </Wrapper>
-    )
+  function updateResults(newResult: Calculation) {
+    setResults(prevState => [newResult, ...prevState]);
+  }
+
+
+  function prettifyDate(date: string) {
+    return moment(date).format("h:mm:ss a");
+  }
+
+  return (
+    <Wrapper>
+      <h2>RESULTS</h2>
+      {results.map(result => (
+        <Card key={`result ${result.time}`}>
+          <CardContent>
+            <Typography variant="caption" color="textSecondary">{result.user} at {prettifyDate(result.time)}:</Typography> <Typography color="secondary">{result.input} = {result.result}</Typography>
+          </CardContent>
+        </Card>
+      ))}
+    </Wrapper>
+  )
 }
 
 const Wrapper = styled.div`
