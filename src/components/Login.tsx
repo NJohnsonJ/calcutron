@@ -21,14 +21,16 @@ const Login: React.FC<Props> = (props) => {
     <Grid item>
       <Card>
         <CardContent>
-          <Typography><code>TELL ME YOUR NAME.</code></Typography>
-          <BasicInput
-            value={name}
-            label="NAME"
-            buttonText="ENTER"
-            onChange={handleChange}
-            onSubmit={handleSubmit}
-          />
+          <Grid container justify="center" direction="column">
+            <Typography><code>TELL ME YOUR NAME.</code></Typography>
+            <BasicInput
+              value={name}
+              label="NAME"
+              buttonText="ENTER"
+              onChange={handleChange}
+              onSubmit={handleSubmit}
+            />
+          </Grid>
         </CardContent>
       </Card>
     </Grid>
