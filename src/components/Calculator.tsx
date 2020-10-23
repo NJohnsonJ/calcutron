@@ -20,6 +20,12 @@ interface Props {
   user: string;
 }
 
+/* Regular Expression to test for a valid expression
+ * Can contain numbers of any length followed by any number of operation/number pairs.
+ * The supported operations are addition, subtraction, multiplication, division and modulo.
+ */
+const expressionRegexp = /^-{0,1}[0-9\s]+(?:[+-/*%]-{0,1}[0-9\s]+)*$/.compile();
+
 const Calculator: React.FC<Props> = ({ database, user }) => {
 
   const [input, setInput] = useState<string>("");
@@ -39,19 +45,28 @@ const Calculator: React.FC<Props> = ({ database, user }) => {
     }
   }
 
+  function generateWaitingMessage() {
+    setColor("textPrimary")
+    setMessage("THE SUSPENSE IS KILLING ME.")
+  }
+
   function generateSuccessMessage() {
     setColor("secondary")
     setMessage("BEHOLD. YOUR NEURONS ARE NO MATCH FOR MY TRANSISTORS.")
   }
 
   function generateErrorMessage() {
-    setMessage("MATH DOES NOT CONTAIN LETTERS, HUMAN.")
     setColor("error");
+    setMessage("MATH DOES NOT CONTAIN LETTERS, HUMAN.")
   }
 
   function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
+    if (input.length === 0) {
+      generateWaitingMessage();
+      return;
+    }
 
-    if (!validateInput(input) || input.length === 0) {
+    if (!validateInput(input)) {
       generateErrorMessage();
       return;
     }
@@ -75,8 +90,12 @@ const Calculator: React.FC<Props> = ({ database, user }) => {
     setInput("");
   }
 
-  function validateInput(value: string) {
-    return value.match(/^$|^-{0,1}[0-9\s]+(?:[+-/*%]-{0,1}[0-9\s]+)*$/);
+  /**
+   * @param value A mathematical expression
+   * @returns true if the value is an expression, otherwise false.
+   */
+  function validateInput(value: string): boolean {
+    return expressionRegexp.test(value);
   }
 
   return (

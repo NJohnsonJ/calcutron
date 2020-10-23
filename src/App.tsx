@@ -13,7 +13,6 @@ function App() {
   const [user, setUser] = useState<string>("");
   const [database, setDatabase] = useState<Database | null>(null);
 
-  // Setup the database connection
   useEffect(() => {
     setDatabase(setupDatabase());
   }, []);
@@ -29,12 +28,8 @@ function App() {
             )}
             {database !== null && user !== "" && (
               <React.Fragment>
-                <Grid item>
-                  <Calculator database={database} user={user} />
-                </Grid>
-                <Grid item>
-                  <Results database={database} />
-                </Grid>
+                <Calculator database={database} user={user} />
+                <Results database={database} />
               </React.Fragment>
             )}
           </Grid>

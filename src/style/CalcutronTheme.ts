@@ -1,13 +1,15 @@
 import { createMuiTheme } from "@material-ui/core";
 
+const green = "#00f008";
+
 const calcutronTheme = createMuiTheme({
   palette: {
     primary: {
       main: "#000",
-      contrastText: "#00f008"
+      contrastText: green
     }, 
     secondary: {
-      main: "#00f008",
+      main: green,
       contrastText: "#000"
     },
   }

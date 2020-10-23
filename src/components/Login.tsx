@@ -18,22 +18,20 @@ const Login: React.FC<Props> = (props) => {
   }
 
   return (
-    <Grid item>
-      <Card>
-        <CardContent>
-          <Grid container justify="center" direction="column">
-            <Typography><code>TELL ME YOUR NAME.</code></Typography>
-            <BasicInput
-              value={name}
-              label="NAME"
-              buttonText="ENTER"
-              onChange={handleChange}
-              onSubmit={handleSubmit}
-            />
-          </Grid>
-        </CardContent>
-      </Card>
-    </Grid>
+    <Card>
+      <CardContent>
+        <Grid container justify="center" direction="column">
+          <Typography><code>TELL ME YOUR NAME.</code></Typography>
+          <BasicInput
+            value={name}
+            label="NAME"
+            buttonText="ENTER"
+            onChange={handleChange}
+            onSubmit={handleSubmit}
+          />
+        </Grid>
+      </CardContent>
+    </Card>
   )
 }
 

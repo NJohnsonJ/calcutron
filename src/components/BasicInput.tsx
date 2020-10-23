@@ -22,7 +22,7 @@ const BasicInput: React.FC<InputProps> = ({ label, value, buttonText, onChange, 
       />
       <Button
         type="submit"
-        onClick={e => {e.preventDefault(); onSubmit(e);}}
+        onClick={e => {e.preventDefault(); onSubmit(e);}} // Don't let the page reload
         color="primary"
         variant="contained"
       >

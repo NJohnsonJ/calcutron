@@ -6,10 +6,10 @@ const endpoint = "/calculations"
 const limit = 10;
 
 export interface Calculation {
-  user: string;
-  time: any;
-  input: string;
-  result: string;
+  user: string; // The user who made the calculation
+  time: any; // The time of the calculation
+  input: string; // The input that was evaluated
+  result: string; // The result of evaluating the input
 }
 
 export interface Database {
