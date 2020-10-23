@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import BasicInput from "./BasicInput";
-import { Grid, Card, CardContent } from "@material-ui/core";
+import { Grid, Card, CardContent, Typography } from "@material-ui/core";
 
 interface Props {
   handleSubmit: (name: string) => void;
@@ -21,9 +21,10 @@ const Login: React.FC<Props> = (props) => {
     <Grid item>
       <Card>
         <CardContent>
+          <Typography><code>TELL ME YOUR NAME.</code></Typography>
           <BasicInput
             value={name}
-            label="WHAT IS YOUR NAME?"
+            label="NAME"
             buttonText="ENTER"
             onChange={handleChange}
             onSubmit={handleSubmit}
